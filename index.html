@@ -1,1 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ameera Mansur — Computer System Security</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15191d;
+    --ink-soft:#454d52;
+    --paper:#ece7db;
+    --paper-raised:#f4f0e6;
+    --line:#c9c1ac;
+    --amber:#b9790a;
+    --amber-deep:#8f5c06;
+    --teal:#3d6b66;
+    --red-stamp:#9c3b2c;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+    background-image:
+      linear-gradient(var(--paper) 0px, var(--paper) 100%);
+  }
+  ::selection{background:var(--amber); color:var(--paper);}
 
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif; font-weight:600; letter-spacing:-0.01em;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  .wrap{max-width:900px; margin:0 auto; padding:0 28px;}
+
+  /* ---------- Header / file tab ---------- */
+  header{
+    border-bottom:2px solid var(--ink);
+    padding:20px 0;
+  }
+  header .wrap{display:flex; justify-content:space-between; align-items:center;}
+  .filecode{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    letter-spacing:0.06em;
+  }
+  nav a{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--ink);
+    text-decoration:none;
+    margin-left:22px;
+    letter-spacing:0.04em;
+    border-bottom:1px solid transparent;
+  }
+  nav a:hover{border-bottom:1px solid var(--amber);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:88px 0 80px;
+    border-bottom:1px dashed var(--line);
+    position:relative;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--red-stamp);
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    margin-bottom:20px;
+  }
+  .hero h1{
+    font-size:clamp(38px,6vw,58px);
+    line-height:1.15;
+    max-width:780px;
+  }
+  .hero .role{
+    margin-top:28px;
+    font-size:18px;
+    line-height:1.7;
+    color:var(--ink-soft);
+    max-width:560px;
+  }
+  .stamp{
+    position:absolute;
+    top:60px; right:28px;
+    width:118px; height:118px;
+    border:2.5px solid var(--red-stamp);
+    border-radius:50%;
+    color:var(--red-stamp);
+    display:flex; align-items:center; justify-content:center;
+    text-align:center;
+    transform:rotate(-14deg);
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.06em;
+    line-height:1.4;
+    opacity:0.85;
+  }
+  .hero-links{margin-top:40px; display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    padding:10px 18px;
+    border:1.5px solid var(--ink);
+    text-decoration:none;
+    color:var(--ink);
+    letter-spacing:0.03em;
+    transition:all .15s ease;
+  }
+  .btn:hover{background:var(--ink); color:var(--paper);}
+  .btn.primary{background:var(--amber); border-color:var(--amber-deep); color:var(--paper);}
+  .btn.primary:hover{background:var(--amber-deep);}
+
+  /* ---------- Section headers ---------- */
+  section{padding:80px 0;}
+  section + section{border-top:1px dashed var(--line);}
+  .sec-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--teal);
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  .sec-title{font-size:28px; margin-bottom:44px;}
+
+  /* ---------- About ---------- */
+  .about-grid{display:grid; grid-template-columns:1.4fr 1fr; gap:60px;}
+  .about-grid p{color:var(--ink-soft); font-size:15.5px; line-height:1.75; margin-bottom:20px;}
+  .fact-sheet{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    padding:26px 26px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+  }
+  .fact-sheet div{display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px dotted var(--line);}
+  .fact-sheet div:last-child{border-bottom:none;}
+  .fact-sheet span:first-child{color:var(--ink-soft);}
+  .fact-sheet span:last-child{text-align:right; font-weight:500;}
+
+  /* ---------- Projects ---------- */
+  .project{
+    display:grid;
+    grid-template-columns:110px 1fr;
+    gap:28px;
+    padding:38px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .project:first-child{padding-top:0;}
+  .project:last-child{border-bottom:none; padding-bottom:0;}
+  .badge{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:5px 10px;
+    border:1px solid currentColor;
+    display:inline-block;
+    height:fit-content;
+    white-space:nowrap;
+  }
+  .badge.deployed{color:var(--teal);}
+  .badge.awarded{color:var(--amber-deep);}
+  .badge.ranked{color:var(--red-stamp);}
+  .project h3{font-size:19px; margin-bottom:12px;}
+  .project p{color:var(--ink-soft); font-size:14.5px; line-height:1.7; margin-bottom:16px;}
+  .tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;}
+  .tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    padding:3px 8px;
+  }
+  .project a{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+    color:var(--ink);
+    text-decoration:none;
+    border-bottom:1px solid var(--amber);
+  }
+
+  /* ---------- Skills ---------- */
+  .skills-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:40px;}
+  .skill-col h4{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--red-stamp);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    margin-bottom:16px;
+    padding-bottom:10px;
+    border-bottom:1px solid var(--ink);
+  }
+  .skill-col li{list-style:none; font-size:14px; color:var(--ink-soft); padding:8px 0;}
+
+  /* ---------- Certifications / Awards ---------- */
+  .cert-list{display:flex; flex-direction:column; gap:0;}
+  .cert-row{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:20px;
+    padding:22px 0;
+    border-bottom:1px dotted var(--line);
+    align-items:baseline;
+  }
+  .cert-row .name{font-weight:500; font-size:15px;}
+  .cert-row .issuer{color:var(--ink-soft); font-size:13px; margin-top:5px; line-height:1.6;}
+  .cert-row .date{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    white-space:nowrap;
+  }
+
+  /* ---------- Files (resume/certs folders) ---------- */
+  .file-grid{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
+  .file-card{
+    border:1px solid var(--ink);
+    padding:28px;
+    background:var(--paper-raised);
+  }
+  .file-card .mono{font-size:11px; color:var(--ink-soft); letter-spacing:0.06em;}
+  .file-card h4{font-size:16px; margin:12px 0 14px;}
+  .file-card a.btn{margin-top:4px; display:inline-block;}
+
+  /* ---------- Contact ---------- */
+  .contact-row{display:flex; flex-wrap:wrap; gap:16px; margin-top:20px;}
+
+  footer{
+    padding:30px 0 50px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+
+  @media (max-width:720px){
+    .about-grid{grid-template-columns:1fr;}
+    .skills-grid{grid-template-columns:1fr 1fr;}
+    .file-grid{grid-template-columns:1fr;}
+    .project{grid-template-columns:1fr;}
+    .stamp{position:static; transform:rotate(-6deg); margin-top:24px;}
+    nav a{margin-left:14px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="filecode">FILE // AM–2026–SEC</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#credentials">Credentials</a>
+      <a href="#files">Resume</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero wrap" style="position:relative;">
+  <div class="eyebrow">Subject Profile</div>
+  <h1>Ameera Mansur Omar <span style="font-weight:400; color:var(--ink-soft); font-size:0.5em; display:block; margin-top:10px; letter-spacing:0.02em;">— Cybersecurity</span></h1>
+  <p class="role">Final-year Bachelor of Cybersecurity Technology (Hons.) student at UniKL MIIT — focused on mobile application security, penetration testing, and blue-team operations.</p>
+  <div class="hero-links">
+    <a class="btn primary" href="files/resume/resume.pdf">Download Résumé</a>
+    <a class="btn" href="https://github.com/ameeramansur" target="_blank">GitHub</a>
+    <a class="btn" href="#contact">Contact</a>
+  </div>
+  <div class="stamp">VERIFIED<br>CLEARANCE<br>LEVEL: FYP</div>
+</section>
+
+<section id="about" class="wrap">
+  <div class="sec-label">01 — Background</div>
+  <h2 class="sec-title">About</h2>
+  <div class="about-grid">
+    <div>
+      <p>I'm a final-year Computer System Security student, currently completing a final-year project on secure mobile application development — building a counselling platform with role-based access control, encrypted local storage, and OWASP Mobile Top 10–aligned penetration testing baked into the process, not bolted on after.</p>
+      <p>Alongside coursework, I've audited physical infrastructure against ISO/IEC 27001:2022, competed in national capture-the-flag events, and hold professional certifications spanning cybersecurity and cloud administration. I'm currently seeking opportunities in blue-team operations, SOC analysis, and digital forensics.</p>
+    </div>
+    <div class="fact-sheet">
+      <div><span>Institution</span><span>UniKL MIIT</span></div>
+      <div><span>Programme</span><span>B. Cybersecurity Technology (Hons.)</span></div>
+      <div><span>Focus</span><span>AppSec / Blue Team / Forensics</span></div>
+      <div><span>Languages</span><span>MS, EN, KR, AR</span></div>
+      <div><span>Status</span><span>Final Year</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="wrap">
+  <div class="sec-label">02 — Case Files</div>
+  <h2 class="sec-title">Projects</h2>
+
+  <div class="project">
+    <span class="badge deployed">Deployed</span>
+    <div>
+      <h3>UniKL E-Counselling — Final Year Project</h3>
+      <p>A secure Flutter/Firebase mobile counselling platform with a dual-dashboard RBAC system for students and counsellors, AES-256 secure local storage, and OTP-based registration with rate limiting and account lockout. Selected for the FYP Innovation Showcase 2026 (Cybersecurity &amp; Network Solution category).</p>
+      <div class="tags">
+        <span class="tag">Flutter / Dart</span>
+        <span class="tag">Firebase &amp; Firestore</span>
+        <span class="tag">Cloud Functions</span>
+        <span class="tag">OWASP Mobile Top 10</span>
+      </div>
+      <p style="margin-bottom:0; font-size:13px;">22/22 functionality tests passed · 23 penetration test scenarios run · Snyk vulnerabilities reduced 18→1</p>
+      <a href="https://github.com/ameeramansur/uniklcounseling-mobileapp" target="_blank">View repository →</a>
+    </div>
+  </div>
+
+  <div class="project">
+    <span class="badge ranked">Ranked 62/100+</span>
+    <div>
+      <h3>International Game of Hackers — CTF Final</h3>
+      <p>Competed as part of a 3-member team in a national capture-the-flag final hosted by UniKL MIIT × Firmus and sponsored by MDEC, placing 62nd out of 100+ teams with 1,535 points.</p>
+      <div class="tags">
+        <span class="tag">Capture the Flag</span>
+        <span class="tag">Team Competition</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="project">
+    <span class="badge awarded">Completed</span>
+    <div>
+      <h3>KLIA Terminal 1 — Physical Security Audit</h3>
+      <p>Team project conducting a physical security audit of KLIA Terminal 1, aligned with ISO/IEC 27001:2022 controls and reporting standards.</p>
+      <div class="tags">
+        <span class="tag">ISO/IEC 27001:2022</span>
+        <span class="tag">Physical Security</span>
+      </div>
+      <a href="files/MINI%20PROJECT%20SLIDE.pdf">View report →</a>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="wrap">
+  <div class="sec-label">03 — Capabilities</div>
+  <h2 class="sec-title">Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-col">
+      <h4>Application Security</h4>
+      <li>OWASP Mobile Top 10 testing</li>
+      <li>Penetration testing</li>
+      <li>Snyk static analysis</li>
+      <li>RBAC / IDOR testing</li>
+    </div>
+    <div class="skill-col">
+      <h4>Development</h4>
+      <li>Flutter / Dart</li>
+      <li>Firebase &amp; Firestore</li>
+      <li>Cloud Functions</li>
+      <li>SQL</li>
+    </div>
+    <div class="skill-col">
+      <h4>Systems &amp; Ops</h4>
+      <li>Linux administration</li>
+      <li>Red Hat System Administration</li>
+      <li>Digital forensics fundamentals</li>
+      <li>ISO/IEC 27001:2022</li>
+    </div>
+  </div>
+</section>
+
+<section id="credentials" class="wrap">
+  <div class="sec-label">04 — Certifications &amp; Awards</div>
+  <h2 class="sec-title">Credentials</h2>
+  <div class="cert-list">
+    <div class="cert-row">
+      <div><div class="name">Google Cybersecurity Professional Certificate</div><div class="issuer">Google, via Coursera</div></div>
+      <div class="date mono">Verified</div>
+    </div>
+    <div class="cert-row">
+      <div><div class="name">Google Project Management Certificate</div><div class="issuer">Google, via Coursera</div></div>
+      <div class="date mono">Verified</div>
+    </div>
+    <div class="cert-row">
+      <div><div class="name">Red Hat System Administration II (RH134-RHA)</div><div class="issuer">Red Hat Academy · 40 credit hours · Verified via Credly</div></div>
+      <div class="date mono">Apr 2026</div>
+    </div>
+    <div class="cert-row">
+      <div><div class="name">Dean's List — Semesters 1, 4, 5 &amp; 6</div><div class="issuer">UniKL MIIT</div></div>
+      <div class="date mono">2023–2026</div>
+    </div>
+    <div class="cert-row">
+      <div><div class="name">FYP Innovation Showcase 2026 — Selected Contestant</div><div class="issuer">Cybersecurity &amp; Network Solution category</div></div>
+      <div class="date mono">2026</div>
+    </div>
+  </div>
+</section>
+
+<section id="files" class="wrap">
+  <div class="sec-label">05 — Attachments</div>
+  <h2 class="sec-title">Resume &amp; Certificates</h2>
+  <div class="file-grid">
+    <div class="file-card">
+      <div class="mono">/FILES/RESUME</div>
+      <h4>Résumé (PDF)</h4>
+      <p style="font-size:13.5px; color:var(--ink-soft);">Full resume including projects, technical skills, certifications, and referees.</p>
+      <a class="btn" href="files/resume/resume.pdf">Open PDF</a>
+    </div>
+    <div class="file-card">
+      <div class="mono">/FILES/CERTIFICATES</div>
+      <h4>Certificates</h4>
+      <p style="font-size:13.5px; color:var(--ink-soft); margin-bottom:14px;">Google, Red Hat, and competition certificates.</p>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <a class="btn" style="text-align:center;" href="files/certificates/Google%20Project%20Management%20Certificate.pdf">Google Project Management</a>
+        <a class="btn" style="text-align:center;" href="files/certificates/redhat-rh134-system-administration-ii.pdf">Red Hat RH134</a>
+        <a class="btn" style="text-align:center;" href="files/certificates/CyberExam-Certificate-Security-Awareness-for-Everyone.pdf">Cyber Security Awareness</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="wrap">
+  <div class="sec-label">06 — Contact</div>
+  <h2 class="sec-title">Get in touch</h2>
+  <p style="color:var(--ink-soft); max-width:520px;">Open to internship and entry-level opportunities in blue-team operations, SOC analysis, and application security.</p>
+  <div class="contact-row">
+    <a class="btn primary" href="https://www.linkedin.com/in/ameera-mansur-omar-618ba9247/" target="_blank">LinkedIn</a>
+    <a class="btn" href="https://github.com/ameeramansur" target="_blank">GitHub</a>
+  </div>
+</section>
+
+<footer>
+  ameeramansur.github.io — built &amp; maintained on GitHub Pages
+</footer>
+
+</body>
+</html>
